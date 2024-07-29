@@ -1,0 +1,14 @@
+.navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.askQuestion{
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
