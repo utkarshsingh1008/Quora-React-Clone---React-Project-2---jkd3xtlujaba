@@ -56,41 +56,17 @@ const NavbarDefault = () => {
 
     //     if (searchTerm.length > 0) {
     //         try {
-    //             const response = await axios.get(`https://academics.newtonschool.co/api/v1/quora/post?search={"content":"${searchTerm}"}`, {
-    //                 headers: {
-    //                     'projectID': 'tpibj7ie8i1w'
-    //                 }
-    //             });
-    //             setSearchResults(response.data.data);
-    //             console.log(response.data.data)
-    //         } catch (error) {
-    //             console.error("Error fetching search results:", error);
-    //         }
-    //     } else {
-    //         setSearchResults([]);
-    //     }
-    // };
-
-    // const nav = () => {
-    //     navigate('/ComingSoon');
-    // };
+  
 
     const notify=()=>{
         toast("Feature under development",{autoClose:1000})
       }
-    // const handlePostClick = (postId) => {
-    //     navigate(`/post/${postId}`);
-    // };
-
-    // const handlePostClick = () => {
-    //     navigate(`/ComingSoon`);
-    // };
-
+  
 
     return (
         <div className="w-full fixed z-10 lg:h-[8%] md:h-[5%] sm:h-[5%] flex" style={postCardStyle}>
             <div className="w-full justify-center text-gray-900 items-center hidden lg:flex shadow-md ">
-                <div className="flex w-full md:w-max xs:flex-wrap justify-between">
+                <div style={{width:"77%"}} className="flex w-full md:w-max xs:flex-wrap justify-between">
                     <Link to="/home" activeClassName="text-red-800" className="mr-5 cursor-pointer font-medium ">
                         <img src={quora} className="w-40 h-6 cursor-pointer xs:w-20" onClick={() => navigate('/home')} />
                     </Link>
@@ -180,12 +156,12 @@ const NavbarDefault = () => {
                                 <Answer className="w-7 h-7 md:w-6 md:h-6" />
                             </Tooltip>
                         </Link>
-                        <Link to="/SpaceList" activeClassName="text-red-800" className="block px-1 py-2 text-gray-900 cursor-pointer">
+                        <Link to="/SpaceList" activeClassName="text-red-800" className="block px-1 py-2 text-gray-900 cursor-pointer hover:bg-gray-300">
                             <Tooltip title="Spaces">
                                 <Spaces className="w-7 h-7 md:w-6 md:h-6" />
                             </Tooltip>
                         </Link>
-                        <div className="block px-1 py-2 text-gray-900 cursor-pointer">
+                        <div className="block px-1 py-2 text-gray-900 cursor-pointer hover:bg-gray-100">
                             <ProfileMenu />
                         </div>
                         <div className="flex px-1 py-2 text-gray-900 cursor-pointer flex-wrap">

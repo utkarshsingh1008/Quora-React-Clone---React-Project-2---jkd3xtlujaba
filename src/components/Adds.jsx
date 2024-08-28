@@ -22,7 +22,7 @@ const Adds = () => {
     }
 
     return (
-        <div className='border bg-gray-300 fixed mt-[5%] left-[73%] w-[12%] h-[50%] rounded-md'>
+        <div className='border bg-gray-300 fixed mt-[5%] left-[75%] w-[14%] h-[50%] rounded-md'>
             <div className='w-100 h-100'>
                 <img src={adds} className='w-80 h-50 p-2' />
             </div>

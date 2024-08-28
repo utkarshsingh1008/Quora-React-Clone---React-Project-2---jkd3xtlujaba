@@ -57,13 +57,13 @@ const SignUp = () => {
             setErrorMessage("Please fill in all the required fields.");
             return;
         }
-
+    
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
             setErrorMessage("Please enter a valid email address.");
             return;
         }
-
+    
         try {
             setLoading(true);
             const body = {
@@ -72,7 +72,7 @@ const SignUp = () => {
                 password: formData.password,
                 appType: "quora",
             };
-
+    
             const response = await axios.post(
                 'https://academics.newtonschool.co/api/v1/user/signup',
                 JSON.stringify(body),
@@ -83,16 +83,17 @@ const SignUp = () => {
                     }
                 }
             );
-
+    
             if (response.status === 201) {
                 const data = response.data;
-
+    
                 if (data.status === "success") {
                     localStorage.setItem("userInfo", JSON.stringify(data.data.user));
                     localStorage.setItem("token", data.token);
                     setOpen(false);
                     toast('Your account created successfully');
                     setFormData({ name: "", email: "", password: "" });
+                    navigate('/home'); // Navigate to the home page after successful sign-up
                 }
             }
         } catch (err) {
@@ -101,6 +102,7 @@ const SignUp = () => {
             setLoading(false);
         }
     };
+    
 
     return (
         <>

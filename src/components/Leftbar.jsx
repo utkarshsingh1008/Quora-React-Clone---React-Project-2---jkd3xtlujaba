@@ -5,6 +5,7 @@ import CreateSpace from './CreateSpace';
 import { Link } from 'react-router-dom';
 import { useUser } from './UserProvider';
 import { toast } from 'react-toastify';
+import { Button } from '@material-tailwind/react';
 
 const Leftbar = () => {
     const { theme } = useUser();
@@ -63,26 +64,26 @@ const Leftbar = () => {
     }
 
     return (      
-            <div className="fixed py-4 pl-4 mt-[5%] ml-[17%] w-[12%] lg:w-[10%] lg:ml-[16%] rounded-2xl " style={postCardStyle}>
-                <div variant="h5" className="text-black mb-4">
-                    <CreateSpace onNewCommunity={handleNewCommunity} />
-                </div>
-                <div className='' >
-                    {communities.map((comm, idx) => (
-                        <Link to="/ComingSoon" key={idx} className="text-[15px] hover:bg-gray-300 hover:rounded-md p-2 flex gap-2 bg-gray-300" style={postCardStyle}>
-                            <img src={cooking} className="h-4 w-4" />
-                            <div className="break-words">{comm.name}</div>
-                        </Link>
-                    ))}
-                </div>
-                <div className="mt-4" onClick={notify}>
-                    <hr className="bg-blue-gray-400" />
-                    <h1 className="mt-3 text-gray-500 text-sm" >About . Careers .</h1>
-                    <h1 className="text-gray-500 text-sm">Terms . Privacy .</h1>
-                    <h1 className="text-gray-500 text-sm">Acceptable Use</h1>
-                    <h1 className="text-gray-500 text-sm">Terms . Privacy .</h1>
-                </div>
-            </div>
+        <div className="fixed py-4 pl-4 mt-[5%] ml-[17%] w-[12%] lg:w-[13%] lg:ml-[11%] rounded-2xl " style={postCardStyle }>
+        <div variant="h5" className="text-black mb-4">
+            <CreateSpace onNewCommunity={handleNewCommunity} />
+        </div>
+        <div className='' >
+            {communities.map((comm, idx) => (
+               <Link to="/ComingSoon" key={idx} className="text-[15px] hover:bg-gray-400 hover:rounded-md p-2 flex gap-2 bg-gray-200 " style={postCardStyle}>
+                    <img  src={cooking} className="h-4 w-4  hover:bg-gray-400 mt-1.5" />
+                    <button className="break-words hover:bg-gray-200 p-1 rounded-2xl">{comm.name}</button>
+                </Link>
+            ))}
+        </div> 
+        <div className="mt-4" onClick={notify}>
+            <hr className="bg-blue-gray-400" />
+            <h1 className="mt-3 text-gray-500 text-sm" >About . Careers .</h1>
+            <h1 className="text-gray-500 text-sm">Terms . Privacy .</h1>
+            <h1 className="text-gray-500 text-sm">Acceptable Use</h1>
+            <h1 className="text-gray-500 text-sm">Terms . Privacy .</h1>
+        </div>
+    </div>
     );
 };
 

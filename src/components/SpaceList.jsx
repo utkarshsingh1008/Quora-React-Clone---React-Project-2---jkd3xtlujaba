@@ -102,7 +102,7 @@ const SpaceList = () => {
       <div className="" style={cardStyle}>
         <div className="">
           {/* <div className='font-bold'>Discover Spaces</div> */}
-          <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-[20%] rounded-lg">
+          <div  className="grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-[20%] rounded-lg">
             {communities.map((comm, idx) => (
               <div key={idx} className="community-card bg-gray-200 mt-20" >
                 <Link to="/ComingSoon">

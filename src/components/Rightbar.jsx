@@ -149,7 +149,7 @@ const Rightbar = () => {
             </h1>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center cursor-pointer">
             <Answer />
             <h1 className="" onClick={() => navigate("/Answers")}>
               Answer

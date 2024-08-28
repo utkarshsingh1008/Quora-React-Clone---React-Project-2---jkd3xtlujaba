@@ -15,6 +15,10 @@ export default function Login() {
         password: '',
         appType: 'quora'
     });
+     
+    const notify=()=>{
+        toast("Feature under development",{autoClose:1000})
+      }
 
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -78,11 +82,11 @@ export default function Login() {
                             </h1>
                             <div className='flex p-4 border border-spacing-1 items-center w-full lg:w-80 rounded-sm mt-5'>
                                 <img src={googleLogo} className='w-5 h-5 ml-2' alt='Google logo' />
-                                <h1 className='ml-7 cursor-not-allowed'>Continue with Google</h1>
+                                <h1 className='ml-7 cursor-pointer' onClick={notify}>Continue with Google</h1>
                             </div>
                             <div className='flex p-4 border border-spacing-1 items-center w-full lg:w-80 rounded-sm mt-5'>
                                 <img src={facebookLogo} className='w-6 h-5 ml-2 rounded-full' alt='Facebook logo' />
-                                <h1 className='ml-7 cursor-not-allowed'>Continue with Facebook</h1>
+                                <h1 className='ml-7 cursor-pointer' onClick={notify}>Continue with Facebook</h1>
                             </div>
                             <div className='text-center text-sm font-semibold text-zinc-600 mt-3 hover:bg-gray-100 rounded-full cursor-pointer'>
                                 <SignUp />

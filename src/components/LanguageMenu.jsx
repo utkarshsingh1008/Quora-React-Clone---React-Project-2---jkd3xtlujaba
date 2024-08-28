@@ -32,7 +32,7 @@ const LanguageMenu = () => {
             </MenuItem>
             <MenuItem className="flex items-center gap-2" onClick={notify}>
               <div variant="small" className="font-medium"  >
-                Telugu  
+                Hindi
               </div>
             </MenuItem>
             <MenuItem className="flex items-center gap-2" onClick={notify}>

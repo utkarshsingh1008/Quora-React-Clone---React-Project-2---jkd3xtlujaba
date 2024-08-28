@@ -18,19 +18,18 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState(postTitle || "");
   const [content, setContent] = useState(postContent || "");
-  const [posts, setPosts] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
   const handleOpen = () => setOpen(!open);
 
-  const notify=()=>{
-    toast("Feature under development",{autoClose:1000})
-  }
+  const notify = () => {
+    toast("Feature under development", { autoClose: 1000 });
+  };
 
   const colour = {
     backgroundColor: theme === 'light' ? 'white' : 'black',
     colorBlue: theme === 'light' ? 'gray' : 'white'
   };
 
-  // const userInfo = JSON.parse(localStorage.getItem("userInfo"))?._id;
   const token = localStorage.getItem('token');
   const headers = {
     'Authorization': `Bearer ${token}`,
@@ -42,23 +41,13 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
       const response = await axios.get(`https://academics.newtonschool.co/api/v1/quora/post/${postId}/comments`, { headers });
       setData(response.data.data);
     } catch (error) {
-      console.error( error.response.data.message);
+      console.error(error.response.data.message);
     }
   };
 
   useEffect(() => {
-    // Fetch initial upvote state from local storage if available
-    // const upvoteState = localStorage.getItem(`upvote_${postId}`);
-    // if (upvoteState) {
-    //   const { color, count } = JSON.parse(upvoteState);
-    //   setColorBlue(color === 'lightBlue' ? 'lightBlue' : '');
-    //   setColorRed(color === '#ff6666' ? '#ff6666' : '');
-    //   setCount(count);
-    // }
-  
     fetchComments();
   }, [postId]);
-
 
   const handleUpvote = async () => {
     try {
@@ -66,28 +55,19 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
       setCount(likeCount => likeCount + 1);
       setColorBlue('lightBlue');
       setColorRed('');
-  
-      // Save color and count to local storage
-      // localStorage.setItem(`upvote_${postId}`, JSON.stringify({ color: 'lightBlue', count: likeCount + 1 }));
-  
       toast('You liked the post');
     } catch (error) {
       console.error('Error upvoting the post:', error);
       toast.error(error.response.data.message);
-      // setColorBlue('');
     }
   };
-  
+
   const handleDownvote = async () => {
     try {
       await axios.delete(`https://academics.newtonschool.co/api/v1/quora/like/${postId}`, { headers });
       setCount(likeCount => likeCount - 1);
-      setColorRed('#ff6666');
+      setColorRed('#FFCCCC');
       setColorBlue('');
-  
-      // Save color and count to local storage
-      // localStorage.setItem(`upvote_${postId}`, JSON.stringify({ color: '#ff6666', count: likeCount - 1 }));
-  
       toast('You disliked the post');
     } catch (error) {
       console.error('Error downvoting the post:', error);
@@ -95,7 +75,6 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
       toast.error(error.response.data.message);
     }
   };
-  
 
   const handleAddComment = async () => {
     const body = {
@@ -105,10 +84,9 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
     try {
       const response = await axios.post(`https://academics.newtonschool.co/api/v1/quora/comment/${postId}`, body, { headers });
       setData(prevData => [...prevData, response.data.data]);
-      setPostComment(''); // Clear the input field
-      setComment(comment => comment + 1); // Increment comment count
+      setPostComment('');
+      setComment(comment => comment + 1);
       toast.success('Comment added successfully');
-      fetchComments();
     } catch (error) {
       console.error('Error adding comment:', error);
       toast.error('Error adding comment');
@@ -119,16 +97,13 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
     try {
       await axios.delete(`https://academics.newtonschool.co/api/v1/quora/comment/${id}`, { headers });
       setData(prevData => prevData.filter(comment => comment._id !== id));
-      setComment(comment => comment - 1); // Decrement comment count
+      setComment(comment => comment - 1);
       toast.success('Comment deleted successfully');
-      // fetchComments();
     } catch (error) {
       console.error('Error deleting comment:', error);
-      toast.error('Error deleting comment' + error.message);
+      toast.error('Error deleting comment');
     }
   };
-
-  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleDropdownToggle = () => setShowDropdown(!showDropdown);
 
@@ -136,31 +111,20 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
 
   const handleEditPost = async (e) => {
     e.preventDefault();
-    // const token = localStorage.getItem("token");
-    // const userInfo = JSON.parse(localStorage.getItem("userInfo"))?._id;
-
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
 
     try {
-      // Fetch the post to check its author
-      const response = await axios.get(`https://academics.newtonschool.co/api/v1/quora/post/${postId}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'projectID': 'tpibj7ie8i1w'
-        }
-      });
+      const response = await axios.get(`https://academics.newtonschool.co/api/v1/quora/post/${postId}`, { headers });
       const postAuthor = response.data?.data?.author?._id;
       
-      // Check if the current user is the author of the post
       if (userInfo !== postAuthor) {
-        setOpen(false)
+        setOpen(false);
         toast.error('You are not authorized to edit this post.');
         return;
       }
 
-      // If the current user is the author, proceed with the edit
       await axios.patch(
         `https://academics.newtonschool.co/api/v1/quora/post/${postId}`,
         formData,
@@ -175,7 +139,6 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
       setOpen(false);
       toast.success('Post updated successfully');
       window.location.reload();
-      // fetchPosts()
     } catch (error) {
       console.error('There was an error updating the post!', error);
       setOpen(false);
@@ -183,42 +146,23 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
     }
   };
 
-
   const deletePost = async () => {
-    // const token = localStorage.getItem("token");
-
-
     try {
-      // Fetch the post to check its author
-      const response = await axios.get(`https://academics.newtonschool.co/api/v1/quora/post/${postId}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'projectID': 'tpibj7ie8i1w'
-        }
-      });
+      const response = await axios.get(`https://academics.newtonschool.co/api/v1/quora/post/${postId}`, { headers });
       const postAuthor = response.data?.data?.author?._id;
-      // console.log(response.data)
-      // console.log(postAuthor)
-      // Check if the current user is the author of the post
+
       if (userInfo !== postAuthor) {
         toast.error('You are not authorized to delete this post.');
         return;
       }
 
-      // If the current user is the author, proceed with deletion
       await axios.delete(
         `https://academics.newtonschool.co/api/v1/quora/post/${postId}`,
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'projectID': 'tpibj7ie8i1w'
-          }
-        }
+        { headers }
       );
       setOpen(false);
       toast.success('Post deleted successfully');
       window.location.reload();
-      // fetchPosts();
     } catch (error) {
       console.error('There was an error deleting the post!', error);
       toast.error(error.response?.data?.message || error.message);
@@ -232,7 +176,7 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
       <div className="flex flex-col gap-2 sm:flex-row justify-between items-center p-3 comments-container xs:flex-row rounded-2xl" style={colour}>
         <div className="flex flex-col items-center sm:flex-row gap-2 xs:flex-row ">
           <div className="flex" >
-            <button  className="bg-pink-100 align-middle select-none font-sans font-bold text-center transition-all disabled:opacity-50 
+            <button  className="bg-gray-100 align-middle select-none font-sans font-bold text-center transition-all disabled:opacity-50 
               disabled:shadow-none disabled:pointer-events-none text-xs px-4 rounded-lg border hover:opacity-75 focus:ring
               focus:ring-white/50 active:opacity-[0.85] rounded-r-none border-r-0 flex items-center border-gray-300
               dark:border-gray-700 capitalize h-6 text-gray-700 dark:text-gray-300 rounded-s-full py-4 gap-1"
@@ -267,7 +211,7 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
                 className="icon_svg-stroke icon_svg-fill" strokeWidth="1.5" fill="none"></path>
             </svg>{comment}
           </button>
-          <button className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all
+          {/* <button className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all
             disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] max-h-[40px] rounded-lg 
             text-xs border hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] border-gray-300 
             dark:border-gray-700 h-6 text-gray-700 dark:text-gray-300 py-4" type="button" onClick={notify}>
@@ -279,7 +223,7 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
                 </g>
               </svg>
             </span>
-          </button>
+          </button> */}
         </div>
         <div className="relative">
           <button
