@@ -8,6 +8,7 @@ import {
   DialogBody,
   DialogFooter,
   Typography,
+  Button,
 } from "@material-tailwind/react";
 import { Notify } from './Icons';
 import { useUser } from './UserProvider';
@@ -53,12 +54,12 @@ const Notification = () => {
           </Typography>
         </DialogBody>
         <DialogFooter className="space-x-2">
-          <div variant="text" color="blue-gray" onClick={handleOpen}>
+          <Button className='cursor-pointer ' variant="text" color="blue-gray" onClick={handleOpen}>
             close
-          </div>
-          <div variant="gradient" onClick={handleOpen}>
+          </Button>
+          <Button className='cursor-pointer variant="text" color="blue-gray' onClick={handleOpen}>
             Ok, Got it
-          </div>
+          </Button>
         </DialogFooter>
       </Dialog>
     </>

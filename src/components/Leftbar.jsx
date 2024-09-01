@@ -72,7 +72,7 @@ const Leftbar = () => {
             {communities.map((comm, idx) => (
                <Link to="/ComingSoon" key={idx} className="text-[15px] hover:bg-gray-400 hover:rounded-md p-2 flex gap-2 bg-gray-200 " style={postCardStyle}>
                     <img  src={cooking} className="h-4 w-4  hover:bg-gray-400 mt-1.5" />
-                    <button className="break-words hover:bg-gray-200 p-1 rounded-2xl">{comm.name}</button>
+                    <button className="break-words hover:bg-gray-400 p-1 rounded-2xl">{comm.name}</button>
                 </Link>
             ))}
         </div> 

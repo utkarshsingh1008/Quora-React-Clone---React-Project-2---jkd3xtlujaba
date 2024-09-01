@@ -31,7 +31,7 @@ const Rightbar = () => {
   };
 
   const postCardStyle = {
-    backgroundColor: theme === 'light' ? 'white' : 'gray',
+    backgroundColor: theme === 'light' ? 'white' : 'Lightgray',
     color: theme === 'light' ? 'black' : 'white',
   };
 
@@ -189,7 +189,7 @@ const Rightbar = () => {
                     name={authorInitial}
                   />
                 )}
-                <h1 className="ml-5 mt-2 font-semibold">{post.author?.name}</h1>
+                <h1 className="ml-5 mt-2 font-semibold text-black">{post.author?.name}</h1>
               </div>
               <div className="p-6">
                 <h5
@@ -198,12 +198,12 @@ const Rightbar = () => {
                 >
                   {post?.title}
                 </h5>
-                <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+                <p className="block font-sans text-base antialiased font-light leading-relaxed  text-black">
                   {post?.content}
                 </p>
               </div>
               {post.images.length > 0 && (
-                <div className="relative h-80 mx-4 -mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-sm bg-blue-gray-500 shadow-blue-gray-500/40">
+                <div className="relative h-80 mx-4 -mt-6 overflow-hidden text-black shadow-lg bg-clip-border rounded-sm bg-blue-gray-500 shadow-blue-gray-500/40">
                   <img
                     src={post.images[0]}
                     alt="card-image"
