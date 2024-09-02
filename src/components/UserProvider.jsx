@@ -28,7 +28,7 @@ export const UserProvider = ({ children }) => {
     setShow,
     postId,
     setPostId,
-    reload
+    
   };
 
   return (
