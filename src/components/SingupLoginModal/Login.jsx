@@ -49,11 +49,14 @@ export default function Login() {
             if (response.status === 200 && response.data.status === 'success') {
                 localStorage.setItem("userInfo", JSON.stringify(response.data.data.user));
                 localStorage.setItem("token", response.data.token);
+
                 localStorage.setItem('status', 'success');
                 toast.success("Login Successful");
                 setTimeout(() => {
                     navigate('/home');
+                    window.location.reload();
                 }, 2000);
+               
             } else {
                 localStorage.setItem('status', 'failure');
                 toast.error("Login failed. Please check your credentials.");
@@ -66,6 +69,7 @@ export default function Login() {
             }
         }
     }
+
 
     return (
         <>

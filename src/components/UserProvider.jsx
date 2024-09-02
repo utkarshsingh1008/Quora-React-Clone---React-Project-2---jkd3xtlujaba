@@ -19,14 +19,16 @@ export const UserProvider = ({ children }) => {
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
   };
-
+  
+  
   const object = {
     theme,
     toggleTheme,
     show,
     setShow,
     postId,
-    setPostId
+    setPostId,
+    reload
   };
 
   return (

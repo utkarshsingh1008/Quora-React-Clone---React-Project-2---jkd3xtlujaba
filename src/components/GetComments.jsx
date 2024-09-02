@@ -226,8 +226,8 @@ const GetComments = ({ postId, likeCount, commentCount, postContent, postTitle }
         <div className="flex flex-col items-center sm:flex-row gap-2 xs:flex-row ">
           <div className="flex" >
             <button  className=" align-middle select-none font-sans font-bold text-center transition-all disabled:opacity-50 
-              disabled:shadow-none disabled:pointer-events-none text-xs px-4 rounded-lg border hover:opacity-75 focus:ring
-              focus:ring-white/50 active:opacity-[0.85] rounded-r-none border-r-0 flex items-center border-gray-300
+              disabled:shadow-none disabled:pointer-events-none text-xs px-4 rounded-lg border hover:opacity-75 
+               rounded-r-none border-r-0 flex items-center border-gray-300
               dark:border-gray-700 capitalize h-6 text-gray-700 dark:text-gray-300 rounded-s-full py-4 gap-1"
               type="button" onClick={handleUpvote} style={{ background: colorBlue}}>
               <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="stroke-blue-500" style={{ backgroundColor: colorBlue }}>

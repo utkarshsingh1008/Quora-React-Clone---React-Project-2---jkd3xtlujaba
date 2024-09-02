@@ -93,7 +93,12 @@ const SignUp = () => {
                     setOpen(false);
                     toast('Your account created successfully');
                     setFormData({ name: "", email: "", password: "" });
-                    navigate('/home'); // Navigate to the home page after successful sign-up
+                    setTimeout(() => {
+                        navigate('/home');
+                        window.location.reload();
+                    }, 2000);
+                    // Navigate to the home page after successful sign-up
+
                 }
             }
         } catch (err) {
